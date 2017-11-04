@@ -9,16 +9,19 @@ export class PlayingCard {
     selector: 'app-root',
     // Multi-line content allowed with back ticks.
     template: `<h1>Hello world!  {{title}} <br/>
-            {{card.cardVal}} of {{card.suit}}.</h1>
-               Card: <input [(ngModel)]="card.cardVal">`
+              <!-- Show cards in unordered list. -->
+              <ul><li *ngFor="let card of cards">{{card.cardVal}}</li></ul>`
 })
 
 export class AppComponent {
     public title = 'This is Angular 4!';
-
-    // Declare a PlayingCard object.
-    public card: PlayingCard = {
-        cardVal: "Ace",
-        suit: "Spades"
-    };
+    // Include card data in collection as public property.
+    public cards = CARDS;
 }
+
+// Define card data.
+var CARDS: PlayingCard[] = [
+    { cardVal: "Ace", suit: "Spades" },
+    { cardVal: "Two", suit: "Clubs" },
+    { cardVal: "Six", suit: "Hearts" },
+];
