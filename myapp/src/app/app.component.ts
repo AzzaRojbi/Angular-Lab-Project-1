@@ -8,34 +8,32 @@ export class PlayingCard {
 @Component({
     selector: 'app-root',
     // Multi-line content allowed with back ticks.
-    template: `<h1>Hello world!  {{title}} </h1>
-
-    <table>
-        <thead>
-        <tr>
-          <th>{{ 'Card' }}</th>
-          <th>{{ 'Suit' }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let card of cards; let i=index">
-          <td>{{ card.cardVal }}</td>
-          <td>{{ card.suit }}</td>
-        </tr>  
-        </tbody>  
-    </table>
-       `
+    template: `<h1>Hello world!  {{title}} <br/>
+              <!-- Show cards in unordered list. -->
+              <ul><li *ngFor="let card of cards" (click)="onSelect(card)">
+                  {{card.cardVal}}</li>
+             </ul>
+             <div *ngIf="selectedCard">
+                 <h2>{{selectedCard.cardVal}} **</h2>
+                 <input [(ngModel)]="selectedCard.cardVal" placeholder="name"/>
+              </div>
+        `
 })
 
-export class AppComponent {
-    public title = 'This is Angular 5!';
-    // Include card data in collection as public property.
-    public cards = CARDS;
+export class AppComponent { 
+    public title = 'This is Angular 4!';
+    // Include card data in class as public property.
+    public cards = CARDS; 
+    selectedCard: PlayingCard;
+  
+    onSelect(card: PlayingCard) { 
+        this.selectedCard = alert(card.suit); 
+    }
 }
 
 // Define card data.
 var CARDS: PlayingCard[] = [
-    { cardVal: "Ace", suit: "Spades" },
-    { cardVal: "Two", suit: "Clubs" },
-    { cardVal: "Six", suit: "Hearts" },
+    { cardVal:"Ace", suit:"Spades"},
+    { cardVal:"Two", suit:"Clubs" },
+    { cardVal:"Six", suit:"Hearts"},
 ];
