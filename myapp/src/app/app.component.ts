@@ -1,31 +1,41 @@
 import { Component } from '@angular/core';
 
+export class PlayingCard {
+    cardVal: string;
+    suit: string;
+}
+
 @Component({
     selector: 'app-root',
-    template:
-    `
-<section>
-<form  (ngSubmit)="onSubmit()" #myForm="ngForm">
-        Name:
-        <input type="text" pattern="[a-zA-Z ]*" minlength="3" required 
-         [(ngModel)]="myName" name="firstName" #firstName="ngModel" >
-        <div [hidden]="firstName.valid || firstName.pristine">
-            This control is invalid.</div>
-        <p *ngIf="firstName?.errors?.required">This field is required.</p>
-        <p *ngIf="firstName?.errors?.pattern">
-            Only alphabetical characters are allowed.</p>
-        <p *ngIf="firstName?.errors?.minlength">
-            This entry must have at least three characters.</p>  
-      <button type="submit" class="btn btn-default" 
-       [disabled]="!myForm.form.valid">Submit</button>
-    </form>
-</section>
-`
-})
-export class AppComponent {
-    myName: string;
+    // Multi-line content allowed with back ticks.
+    template: `<h1>Hello world!  {{title}} </h1>
 
-    constructor() {
-        this.myName = "frank";
-    }
+    <table>
+        <thead>
+        <tr>
+          <th>{{ 'Card' }}</th>
+          <th>{{ 'Suit' }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let card of cards; let i=index">
+          <td>{{ card.cardVal }}</td>
+          <td>{{ card.suit }}</td>
+        </tr>  
+        </tbody>  
+    </table>
+       `
+})
+
+export class AppComponent {
+    public title = 'This is Angular 5!';
+    // Include card data in collection as public property.
+    public cards = CARDS;
 }
+
+// Define card data.
+var CARDS: PlayingCard[] = [
+    { cardVal: "Ace", suit: "Spades" },
+    { cardVal: "Two", suit: "Clubs" },
+    { cardVal: "Six", suit: "Hearts" },
+];
